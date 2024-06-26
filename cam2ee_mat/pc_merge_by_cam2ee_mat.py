@@ -83,10 +83,3 @@ if __name__ == "__main__":
         o3d.visualization.draw_geometries([pc_merged])
     
     o3d.io.write_point_cloud("raw_rail.ply", pc_merged)
-
-    # Estimate normals (necessary for surface reconstruction)
-    pc_merged.estimate_normals()
-    # Perform Poisson surface reconstruction to create a mesh
-    mesh, densities = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pc_merged, depth=9)
-    # Save the mesh to a PLY file
-    o3d.io.write_triangle_mesh("reconstructed_rail.ply", mesh)
