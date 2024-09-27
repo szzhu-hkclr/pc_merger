@@ -25,28 +25,31 @@ def merge_pc(pc_A, pose_A, pc_B, pose_B):
 
 
 if __name__ == "__main__":
-    with open('data.json', 'r') as f:
+    # with open('data.json', 'r') as f:
+    root_path = './2024-09-26'
+    with open(f'{root_path}/data.json', 'r') as f:
         config = json.load(f)
 
     pc_file_paths = config['point_cloud_path']
-    camera_posees = config['camera_pose']
+    camera_poses = config['camera_pose']
     ref_idx = config['reference_frame_idx']
 
-    pc_ref = o3d.io.read_point_cloud(pc_file_paths[ref_idx])
-    pose_ref = camera_posees[ref_idx]
+    # pc_ref = o3d.io.read_point_cloud(pc_file_paths[ref_idx])
+    pc_ref = o3d.io.read_point_cloud(f'{root_path}/' + pc_file_paths[ref_idx])
+    pose_ref = camera_poses[ref_idx]
     del pc_file_paths[ref_idx]
-    del camera_posees[ref_idx]
+    del camera_poses[ref_idx]
     
     pc_merged = copy.deepcopy(pc_ref)
     o3d.visualization.draw_geometries([pc_merged])
 
 
-    for pc_file_path, camera_pose in zip(pc_file_paths, camera_posees):
+    for pc_file_path, camera_pose in zip(pc_file_paths, camera_poses):
         print(pc_file_path) 
         print(camera_pose)
-        pc_to_be_transformed = o3d.io.read_point_cloud(pc_file_path)
+        pc_to_be_transformed = o3d.io.read_point_cloud(f'{root_path}/' + pc_file_path)
         pc_merged = merge_pc(pc_merged, pose_ref, pc_to_be_transformed, camera_pose)
         o3d.visualization.draw_geometries([pc_merged])
 
-
+    o3d.io.write_point_cloud("merged.ply", pc_merged)
 
