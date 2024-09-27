@@ -34,8 +34,8 @@ def rectify_pc(pc_A, pose_A, pc_B, pose_B):
 
 if __name__ == "__main__":
     rectify = False
-    # with open('data.json', 'r') as f:
-    root_path = './2024-09-26'
+    root_path = './flaw_inspect'
+    # root_path = './2024-09-26'
     with open(f'{root_path}/data.json', 'r') as f:
         config = json.load(f)
 
@@ -43,7 +43,6 @@ if __name__ == "__main__":
     camera_poses = config['camera_pose']
     ref_idx = config['reference_frame_idx']
 
-    # pc_ref = o3d.io.read_point_cloud(pc_file_paths[ref_idx])
     pc_ref = o3d.io.read_point_cloud(f'{root_path}/' + pc_file_paths[ref_idx])
     pose_ref = camera_poses[ref_idx]
     del pc_file_paths[ref_idx]
