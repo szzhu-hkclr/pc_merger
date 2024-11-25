@@ -37,7 +37,8 @@ def merge_pc(c2f_mat, pc_A, A_mat, pc_B, B_mat):
 
 
 if __name__ == "__main__":
-    root_path = './2024-11-12'
+    #root_path = './2024-11-12'
+    root_path = './2024-11-23'
     with open(f'{root_path}/data.json', 'r') as f:
         config = json.load(f)
 
