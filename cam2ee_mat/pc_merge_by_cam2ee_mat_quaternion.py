@@ -37,9 +37,8 @@ def merge_pc(c2f_mat, pc_A, A_mat, pc_B, B_mat):
 
 
 if __name__ == "__main__":
-    #root_path = './2024-11-12'
-    # root_path = './2024-11-23'
-    root_path = './2025-02-03'
+    # root_path = './2025-02-03'
+    root_path = './2025-03-18'
     with open(f'{root_path}/data.json', 'r') as f:
         config = json.load(f)
 
@@ -77,4 +76,4 @@ if __name__ == "__main__":
         pc_merged = merge_pc(cam2flange_mat, pc_merged, mat_ref, pc_to_be_transformed, np.array(flange_mat))
         o3d.visualization.draw_geometries([pc_merged])
     
-    o3d.io.write_point_cloud("chessboard.ply", pc_merged)
+    o3d.io.write_point_cloud("wheel_cover.ply", pc_merged)
